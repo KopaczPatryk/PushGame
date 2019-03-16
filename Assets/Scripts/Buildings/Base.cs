@@ -1,18 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float SpawnInterval = 1;
 
-    // Update is called once per frame
+    private float elapsedTime = 0;
+    private int currentLane = 0;
+
     void Update()
     {
-        
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= SpawnInterval)
+        {
+            SpawnRandomUnit(currentLane);
+            currentLane++;
+            if (currentLane > 2)
+            {
+                currentLane = 0;
+            }
+        }
+    }
+
+    private void SpawnRandomUnit(int lane)
+    {
+        throw new NotImplementedException();
     }
 }
