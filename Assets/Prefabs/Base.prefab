@@ -369,3 +369,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82bef1fc0f270c64496ef506ed68eef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnInterval: 3
+  SpawnPoint: {fileID: 7872729461565182177}

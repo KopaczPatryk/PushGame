@@ -9,13 +9,23 @@ namespace Assets.Scripts
 {
     public class Unit : MonoBehaviour
     {
-        private readonly float demage;
-        private readonly float health;
+        public float demage;
+        public float health;
 
-        public Unit(float dmg, float hp)
+        public void Setup(float dmg, float hp)
         {
             demage = dmg;
             health = hp;
+        }
+
+        public override string ToString()
+        {
+            return $"Unit hp: {health}, dmg: {demage}";
+        }
+
+        public virtual void Attack()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

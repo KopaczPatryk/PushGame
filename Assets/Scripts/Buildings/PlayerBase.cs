@@ -1,31 +1,63 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Base : MonoBehaviour
+public class PlayerBase : MonoBehaviour
 {
-    public float SpawnInterval = 1;
+    public float SpawnInterval = 3;
+    public Transform SpawnPoint;
+    
+    private UnitFactory UnitFactory;
+    private PathingProvider PathingProvider;
 
+    private System.Random Random;
+
+    private void Start()
+    {
+        Random = new System.Random();
+        ReferenceServices();
+        PathingProvider.SignBase(this);
+    }
+
+    private void ReferenceServices()
+    {
+        UnitFactory = FindObjectOfType<UnitFactory>();
+        PathingProvider = FindObjectOfType<PathingProvider>();
+    }
+    
     private float elapsedTime = 0;
     private int currentLane = 0;
-
     void Update()
     {
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= SpawnInterval)
         {
-            SpawnRandomUnit(currentLane);
-            currentLane++;
-            if (currentLane > 2)
+            Side thisSide = PathingProvider.Side(this);
+            if (PathingProvider.CanEnroll(thisSide))
             {
-                currentLane = 0;
+                Unit unit = SpawnRandomUnit(currentLane);
+                PathingProvider.EnrollUnit(thisSide, unit);
+                currentLane++;
+                if (currentLane > 2)
+                {
+                    currentLane = 0;
+                }
+                elapsedTime = 0;
             }
         }
     }
 
-    private void SpawnRandomUnit(int lane)
+    private Unit SpawnRandomUnit(int lane)
     {
-        throw new NotImplementedException();
+        var unit = UnitFactory.SpawnUnit(1 + Random.Next(2), 10);
+        Debug.Log($"Spawned unit with specs {unit.ToString()}");
+        return unit;
+    }
+
+    public Transform GetSpawnPoint()
+    {
+        return SpawnPoint;
     }
 }

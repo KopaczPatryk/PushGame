@@ -288,6 +288,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502325823010786436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6deca6c8c8dab42822c55f2b3eed18, type: 3}
+  m_Script: {fileID: 11500000, guid: 797fa3632c108c841ab42b12c404bb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftPathEnd: {fileID: 1270568108}
+  rightPathEnd: {fileID: 1690672264}
+  LeftBase: {fileID: 0}
+  RightBase: {fileID: 0}
